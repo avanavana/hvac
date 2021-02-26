@@ -1,6 +1,6 @@
 {
   "name": "hvac",
-  "version": "1.0.0",
+  "version": "2.2.0",
   "description": "Communicates with IoT temperature and humidity sensors and heating/cooling devices to maintain comfortable indoor climate.",
   "bin": {
     "hvac": "./bin/index.js"

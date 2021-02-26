@@ -3,7 +3,7 @@
 /**
  * @file hvac - Simple CLI for controlling Tuya-enabled smart plugs and switches
  * @author Avana Vana <dear.avana@gmail.com>
- * @version 1.1.0
+ * @version 2.2.0
  */
 
 const TuyAPI = require('tuyapi');
@@ -24,7 +24,7 @@ const devices = new Map(
 
 /** @constant {string} usage - Usage text to display on help option or error */
 
-const usage = `Usage: ${name} <device> [ command ]
+const usage = `Usage: ${name} <device> [ command ] [ options ]
 
 Simple CLI for controlling Tuya-enabled smart plugs and switches.
 
@@ -33,7 +33,8 @@ Arguments:
   command    Either 'on' or 'off', or leave out to just get current device status.
 
 Options:
-  -h         Show this usage file`;
+  -h         Show this usage file
+  -v         Show the version number`;
 
 /**
  *  Wraps usage text in a console.info() call and exits the process with a specified exit code (default: 0)
@@ -43,8 +44,15 @@ Options:
  */
 
 const showUsage = (code = 0) => {
-  if (code === 0) console.info(usage), process.exit(code);
-  else console.error(usage), process.exit(code);
+  if (code === 0) console.info(usage);
+  else console.error(usage);
+  process.exit(code);
+};
+
+/** @function showVersion - Wraps version in a console.info() call and exits the process */
+
+const showVersion = () => {
+  console.info(version), process.exit();
 };
 
 /**
@@ -93,6 +101,7 @@ const commandDevice = async ({ deviceName, command }) => {
 const parseArgs = () => {
   const args = process.argv.slice(2);
   if (args.some((arg) => /^(?:--?[Hh](?:elp)?)$/.test(arg))) showUsage(0);
+  if (args.some((arg) => /^(?:--?[Vv](?:ersion)?)$/.test(arg))) showVersion();
   if (args.length < 2) showUsage(9);
   return { deviceName: args[0], command: args[1] || null };
 };
