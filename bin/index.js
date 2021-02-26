@@ -49,7 +49,7 @@ const showUsage = (code = 0) => {
   process.exit(code);
 };
 
-/** @function showVersion - Wraps version in a console.info() call and exits the process */
+/** @function showVersion - Wraps package.json version in a console.info() call and exits the process */
 
 const showVersion = () => {
   console.info(version), process.exit();
@@ -74,11 +74,10 @@ const commandDevice = async ({ deviceName, command }) => {
     });
 
     if (!device) throw new Error('Invalid device details.');
-
     await device.find();
     await device.connect();
 
-    if (command === 'on' || command === 'off') {
+    if (/^(?:on|off)$/i.test(command)) {
       await device.set({ set: command === 'on' ? true : false });
     }
 
@@ -100,14 +99,19 @@ const commandDevice = async ({ deviceName, command }) => {
 
 const parseArgs = () => {
   const args = process.argv.slice(2);
-  if (args.some((arg) => /^(?:--?[Hh](?:elp)?)$/.test(arg))) showUsage(0);
-  if (args.some((arg) => /^(?:--?[Vv](?:ersion)?)$/.test(arg))) showVersion();
-  if (args.length < 2) showUsage(9);
-  return { deviceName: args[0], command: args[1] || null };
+  if (args.some((arg) => /^(?:--?h(?:elp)?)$/i.test(arg))) showUsage(0);
+  if (args.some((arg) => /^(?:--?v(?:ersion)?)$/i.test(arg))) showVersion();
+  if (args.length < 1) showUsage(9);
+
+  return {
+    deviceName: args[0],
+    command: /^(?:on|off)$/i.test(args[1]) ? args[1] : null,
+  };
 };
 
 /** Do the thing @async */
 
 (async () => {
-  await commandDevice(parseArgs());
+  const status = await commandDevice(parseArgs());
+  console.log(status);
 })();
