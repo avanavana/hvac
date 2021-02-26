@@ -5,7 +5,7 @@ Simple CLI for controlling Tuya-enabled smart plugs and switches.
 ## Usage
 
 ```
-Usage: hvac <device> [ command ]
+Usage: hvac <device> [ command ] [ options ]
 
 Simple CLI for controlling Tuya-enabled smart plugs and switches.
 
@@ -15,6 +15,7 @@ Arguments:
 
 Options:
   -h         Show this usage file
+  -v         Show the version number
 ```
 
 ## What can I do with this?
