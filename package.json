@@ -1,0 +1,37 @@
+{
+  "name": "hvac",
+  "version": "1.0.0",
+  "description": "Communicates with IoT temperature and humidity sensors and heating/cooling devices to maintain comfortable indoor climate.",
+  "bin": {
+    "hvac": "./bin/index.js"
+  },
+  "main": "./bin/index.js",
+  "scripts": {
+    "start": "node ./bin/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hvac",
+    "iot",
+    "tuya",
+    "switchbot",
+    "temperature",
+    "humidity",
+    "climate",
+    "control",
+    "climate",
+    "control",
+    "hvac",
+    "ac",
+    "air",
+    "conditioning",
+    "heating",
+    "comfort"
+  ],
+  "author": "Avana Vana",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "tuyapi": "github:codetheweb/tuyapi"
+  }
+}
