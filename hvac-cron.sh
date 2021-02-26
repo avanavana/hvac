@@ -14,7 +14,7 @@ min_t=24.5
 #min_h=
 
 # code directory - replace with path to your copy of "hvac" nodejs tuya CLI
-base="/absolute-path-to/hvac";
+base="/absolute-path-to/hvac"
 
 # log directory - replace with path to your copy of "hvac" nodejs tuya CLI
 logs="/private/var/log/hvac"
