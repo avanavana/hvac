@@ -16,7 +16,7 @@ min_t=24.5
 # code directory - replace with path to your copy of "hvac" nodejs tuya CLI
 base="/absolute-path-to/hvac"
 
-# log directory - replace with path to your copy of "hvac" nodejs tuya CLI
+# log directory - replace with path to where you want logs stored
 logs="/private/var/log/hvac"
 
 # retrieve current measurements (temperature & humidity) from Switchbot Meter
@@ -38,9 +38,11 @@ if (( ${#current[@]} )); then
   if [[ ${avg_t} -gt ${max_t} && ${heater} ]] ; then
     /usr/local/bin/node "${base}/bin/index.js" office-heater off
     echo " off" >> "${logs}"/temp-humid.log
+    # use terminal-notifier (https://github.com/julienXX/terminal-notifier) or IFTTT here to send an "on" notification to your devices
   elif [[ ${avg_t} -lt ${min_t} && ! ${heater} ]] ; then
     /usr/local/bin/node "${base}/bin/index.js" office-heater on
     echo " on" >> "${logs}"/temp-humid.log
+    # use terminal-notifier (https://github.com/julienXX/terminal-notifier) or IFTTT here to send an "off" notification to your devices
   else
     echo " --" >> "${logs}"/temp-humid.log
   fi
