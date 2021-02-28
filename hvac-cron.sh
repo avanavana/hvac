@@ -36,11 +36,11 @@ if (( ${#current[@]} )); then
 
   # turn heater on or off based on temperature preferences and log event or lack thereof
   if [[ ${avg_t} -gt ${max_t} && ${heater} ]] ; then
-    /usr/local/bin/node "${base}/bin/index.js" office-heater off 1>/dev/null 2>&1
+    /usr/local/bin/node "${base}/bin/index.js" office-heater off >/dev/null 2>&1
     echo " off" >> "${logs}"/temp-humid.log
     # use terminal-notifier (https://github.com/julienXX/terminal-notifier) or IFTTT here to send an "on" notification to your devices
   elif [[ ${avg_t} -lt ${min_t} && ! ${heater} ]] ; then
-    /usr/local/bin/node "${base}/bin/index.js" office-heater on 1>/dev/null 2>&1
+    /usr/local/bin/node "${base}/bin/index.js" office-heater on >/dev/null 2>&1
     echo " on" >> "${logs}"/temp-humid.log
     # use terminal-notifier (https://github.com/julienXX/terminal-notifier) or IFTTT here to send an "off" notification to your devices
   else
